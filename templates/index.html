@@ -3,30 +3,31 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Chat Python IO</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-   
+    
 </head>
 <body>
-    <h1>Socket Io</h1>
-    <ul id = "mensajes"></ul>
-    <form id="mensajesform">
-        <input type="text" id="mensajesInput" autocomplete="off" />
-        <button>Send</button>
+    <h1>Socket IO </h1>
+    <ul id="messages"></ul>
+    <form id="messageform"> 
+        <input type="text" id="messageInput" autocomplete="off" />
+        <button>Send</button> 
     </form>
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous">
-    </script>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
     <script>
-        var socket = io.connect ('http://'+document.domain+':'+location.port);
-        document.getElementById('mensajeform').onsubmit = function(event){
+        var socket = io.connect('http://'+document.domain+':'+location.port);
+        
+        document.getElementById('messageform').onsubmit = function(event) {
             event.preventDefault();
-            var mensajesInput = document.getElementById("mensajeInput");
-            socket.emit('mensaje', mensajesInput.value);
-            mensajesInput.value = "";
+            var messageInput = document.getElementById("messageInput");
+            socket.emit('mensaje',messageInput.value);
+            messageInput.value = "";
         }
 
         socket.on('mensaje', function(msg){
-            var ul = document.getElementById("mensajes");
+            var ul = document.getElementById("messages");
             var li = document.createElement("li");
             li.appendChild(document.createTextNode(msg));
             ul.appendChild(li);
